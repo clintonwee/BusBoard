@@ -1,22 +1,20 @@
 import logo from "./logo.svg";
 import main from "./styles/main.scss";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [postCode, setPostCode] = useState("");
+  const [buses, setBuses] = useState([]);
 
-  useEffect(() => {
-    fetch("/time")
-      .then((res) => res.json())
-      .then((data) => {
-        setCurrentTime(data.time);
-      });
-  }, []);
-
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     console.log(e.currentTarget.elements.postCode.value);
+    const res = await axios.get(
+      `/bus/${e.currentTarget.elements.postCode.value}`
+    );
+    console.log(res.data);
   };
 
   return (
