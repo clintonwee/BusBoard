@@ -25,6 +25,27 @@ def get_bus(postcode):
     response = requests.get(stopid_url)
     result = response.json()
     
+    #distance, name of road (commonName), name of stop (indicator), stopcode (naptanId)
+    results = []
+    for stopPoint in result['stopPoints'][:2]:
+        stopid = stopPoint['id']
+        bus_url = 'https://api.tfl.gov.uk/StopPoint/{}/Arrivals'.format(stopid)
+        response = requests.get(bus_url)
+        next_buses = [
+                {
+                    'eta': bus['timeToStation'],
+                    'destination': bus['destinationName'],
+                    'busName': bus['lineName']
+                } for bus in response.json()]
+        
+        stop_info = {
+            "stopName": stopPoint['indicator'],
+            "roadName": stopPoint['commonName'],
+            "buses": next_buses
+        }
+        
+        results.append(stop_info)
+        # print(stopPoint['commonName'])
     
-    print(response)
-    return {'response': response.json()}
+    
+    return {'response': results, 'status': 'success'}
