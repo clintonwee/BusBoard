@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import main from "./styles/main.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import BusList from "./components/BusList";
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
@@ -14,6 +15,7 @@ function App() {
     const res = await axios.get(
       `/bus/${e.currentTarget.elements.postCode.value}`
     );
+    setBuses(res.data.response);
     console.log(res.data);
   };
 
@@ -28,13 +30,13 @@ function App() {
           id="postCode"
           onChange={(e) => {
             setPostCode(e.currentTarget.value);
-            console.log(e.currentTarget.value);
           }}
           placeholder="CB11AJ"
           className="input"
         />
         <button type="submit">SUBMIT</button>
       </form>
+      {buses.length > 0 && <BusList stops={buses} />}
     </div>
   );
 }
