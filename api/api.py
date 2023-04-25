@@ -20,5 +20,11 @@ def get_bus(postcode):
     
     print("Longitude : {}".format(longitude))
     print("Latitude : {}".format(latitude))
+    
+    stopid_url = "https://api.tfl.gov.uk/StopPoint/?lat={}&lon={}&stopTypes=NaptanPublicBusCoachTram".format(latitude, longitude)
+    response = requests.get(stopid_url)
+    result = response.json()
+    
+    
     print(response)
     return {'response': response.json()}
