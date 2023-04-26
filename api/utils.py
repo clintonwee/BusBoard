@@ -11,7 +11,7 @@ def get_coordinates(postcode):
     return longitude, latitude
 
 def get_stop_points(longitude, latitude):
-    stopid_url = "https://api.tfl.gov.uk/StopPoint/?lat={}&lon={}&stopTypes=NaptanPublicBusCoachTram".format(latitude, longitude)
+    stopid_url = "https://api.tfl.gov.uk/StopPoint/?lat={}&lon={}&stopTypes=NaptanPublicBusCoachTram&radius=1000".format(latitude, longitude)
     response = requests.get(stopid_url)
     result = response.json()
     return result['stopPoints'][:2]
