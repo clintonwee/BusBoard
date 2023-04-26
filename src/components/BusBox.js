@@ -5,7 +5,8 @@ const BusBox = ({ bus }) => {
     <div className="busBox">
       <p className="busItem">{bus.busName}</p>
       <p className="busItem">{bus.destination}</p>
-      <p className="busItem">{Math.ceil(bus.eta / 60)} minutes</p>
+      {/* <p className="busItem">{Math.ceil(bus.eta / 60)} minutes</p> */}
+      <p className="busItem">{bus.eta} seconds</p>
     </div>
   );
 };

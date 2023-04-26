@@ -4,23 +4,27 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import BusList from "./components/BusList";
 import Spinner from "./components/Spinner";
+import useSWR from "swr";
+import useBus from "./components/useUser";
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [postCode, setPostCode] = useState("");
-  const [buses, setBuses] = useState([]);
-  const [isLoading, setLoading] = useState(false);
+  // const [buses, setBuses] = useState([]);
+  // const [isLoading, setLoading] = useState(false);
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.data.response);
+
+  const { buses, error, isLoading, hasRun } = useBus(postCode);
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    setBuses([]);
-    setLoading(true);
+    // setBuses([]);
     console.log(e.currentTarget.elements.postCode.value);
     const res = await axios.get(
       `/bus/${e.currentTarget.elements.postCode.value}`
     );
-    setBuses(res.data.response);
-    setLoading(false);
+    // setBuses(res.data.response);
     console.log(res.data);
   };
 
@@ -43,7 +47,12 @@ function App() {
       </form>
       <div className="resultBox">
         {isLoading && <Spinner />}
-        {!isLoading && buses.length <= 0 && <p>Bus Times Displayed Here</p>}
+        {!hasRun && !isLoading && buses.length == 0 && (
+          <p>Bus Times Displayed Here</p>
+        )}
+        {!isLoading && hasRun && buses.length == 0 && (
+          <p className="error">Time to walk buddy...</p>
+        )}
         {buses.length > 0 && <BusList stops={buses} />}
       </div>
     </div>
