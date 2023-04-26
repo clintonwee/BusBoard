@@ -3,19 +3,24 @@ import main from "./styles/main.scss";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import BusList from "./components/BusList";
+import Spinner from "./components/Spinner";
 
 function App() {
   const [currentTime, setCurrentTime] = useState(0);
   const [postCode, setPostCode] = useState("");
   const [buses, setBuses] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setBuses([]);
+    setLoading(true);
     console.log(e.currentTarget.elements.postCode.value);
     const res = await axios.get(
       `/bus/${e.currentTarget.elements.postCode.value}`
     );
     setBuses(res.data.response);
+    setLoading(false);
     console.log(res.data);
   };
 
@@ -34,9 +39,13 @@ function App() {
           placeholder="CB11AJ"
           className="input"
         />
-        <button type="submit">SUBMIT</button>
+        <button type="submit">{"Submit"}</button>
       </form>
-      {buses.length > 0 && <BusList stops={buses} />}
+      <div className="resultBox">
+        {isLoading && <Spinner />}
+        {!isLoading && buses.length <= 0 && <p>Bus Times Displayed Here</p>}
+        {buses.length > 0 && <BusList stops={buses} />}
+      </div>
     </div>
   );
 }
