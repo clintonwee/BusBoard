@@ -3,9 +3,9 @@ import bus from "../styles/busBox.scss";
 const BusBox = ({ bus }) => {
   return (
     <div className="busBox">
-      <p>{bus.busName}</p>
-      <p>{bus.destination}</p>
-      <p>{bus.eta}</p>
+      <p className="busItem">{bus.busName}</p>
+      <p className="busItem">{bus.destination}</p>
+      <p className="busItem">{Math.ceil(bus.eta / 60)} minutes</p>
     </div>
   );
 };
