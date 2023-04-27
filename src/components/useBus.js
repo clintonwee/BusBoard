@@ -3,14 +3,25 @@ import axios from "axios";
 import { useState } from "react";
 function useBus(postcode) {
   const [hasRun, setHasRun] = useState(false);
+  const [cache, setCache] = useState([]);
   const fetcher = async () => {
-    if (postcode.length < 6) {
+    console.log("I smell so bad lol");
+    if (postcode.length === 0) {
       return [];
-    } else {
+    }
+
+    // const res = await axios.get(`/bus/${postcode}`);
+    // setHasRun(true);
+    // if (res.data) setCache(res.data.response);
+    // return res.data.response;
+    // }
+    try {
       const res = await axios.get(`/bus/${postcode}`);
       setHasRun(true);
-      console.log(res);
+      setCache(res.data.response);
       return res.data.response;
+    } catch (e) {
+      throw new Error("Invalid Postcode");
     }
   };
   const { data, error, isLoading } = useSWR(`/bus/${postcode}`, fetcher, {
@@ -21,7 +32,7 @@ function useBus(postcode) {
   return {
     buses: data,
     isLoading,
-    isError: error,
+    error,
     hasRun: hasRun,
   };
 }

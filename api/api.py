@@ -1,7 +1,7 @@
 import time
 import requests
 from flask import Flask
-from utils import get_coordinates, get_stop_points, get_buses
+from utils import get_coordinates, get_stop_points, get_buses, verify
 
 app = Flask(__name__)
 
@@ -11,7 +11,13 @@ def get_current_time():
 
 @app.route('/bus/<postcode>')
 def get_bus(postcode):
-
+    is_verified = verify(postcode)
+    
+    # print("CLinton smelly")
+    
+    if not is_verified:
+        return "Invalid postcode", 500
+    
     longitude, latitude = get_coordinates(postcode)
     
     stop_points = get_stop_points(longitude, latitude)

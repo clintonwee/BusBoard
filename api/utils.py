@@ -14,6 +14,7 @@ def get_stop_points(longitude, latitude):
     stopid_url = "https://api.tfl.gov.uk/StopPoint/?lat={}&lon={}&stopTypes=NaptanPublicBusCoachTram&radius=1000".format(latitude, longitude)
     response = requests.get(stopid_url)
     result = response.json()
+    print(stopid_url)
     return result['stopPoints'][:2]
 
 def get_buses(stop_points):
@@ -28,6 +29,7 @@ def get_buses(stop_points):
                     'destination': bus['destinationName'],
                     'busName': bus['lineName']
                 } for bus in response.json()]
+        print(response.json()[0]["lineName"])
         
         stop_info = {
             "stopName": stopPoint['indicator'],
@@ -38,4 +40,13 @@ def get_buses(stop_points):
         results.append(stop_info)
     
     return results
+
+def verify(postcode):
+    verify_url = 'http://api.postcodes.io/postcodes/{}'.format(postcode)
+    response = requests.get(verify_url)
+    result = response.json()
+    if result['status'] == 404:
+        return False
+    else:
+        return True
     
