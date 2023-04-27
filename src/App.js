@@ -1,18 +1,30 @@
-import logo from "./logo.svg";
 import main from "./styles/main.scss";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 import BusList from "./components/BusList";
 import Spinner from "./components/Spinner";
-import useSWR from "swr";
 import useBus from "./components/useBus";
 
 function App() {
   const [postCode, setPostCode] = useState("");
 
-  const fetcher = (...args) => fetch(...args).then((res) => res.data.response);
-
   const { buses, error, isLoading, hasRun } = useBus(postCode);
+
+  function debounce(func, timeout = 1000) {
+    let timer;
+
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, timeout);
+    };
+  }
+
+  function savePostCode(temp) {
+    setPostCode(temp);
+  }
+
+  const processChange = debounce((e) => savePostCode(e.target.value));
 
   return (
     <div className="container">
@@ -23,9 +35,7 @@ function App() {
       <form className="inputBox">
         <input
           id="postCode"
-          onChange={(e) => {
-            setPostCode(e.currentTarget.value);
-          }}
+          onChange={processChange}
           placeholder="CB11AJ"
           className="input"
         />

@@ -8,7 +8,6 @@ const BusBox = ({ bus }) => {
       <p className="busItem">
         {Math.floor(bus.eta / 60)} min {bus.eta % 60} s
       </p>
-      {/* <p className="busItem">{bus.eta} seconds</p> */}
     </div>
   );
 };
