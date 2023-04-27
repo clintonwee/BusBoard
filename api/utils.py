@@ -29,12 +29,12 @@ def get_buses(stop_points):
                     'destination': bus['destinationName'],
                     'busName': bus['lineName']
                 } for bus in response.json()]
-        print(response.json()[0]["lineName"])
         
+        sorted_buses = sorted(next_buses, key=lambda d: d['eta'])
         stop_info = {
             "stopName": stopPoint['indicator'],
             "roadName": stopPoint['commonName'],
-            "buses": next_buses
+            "buses": sorted_buses
         }
         
         results.append(stop_info)
