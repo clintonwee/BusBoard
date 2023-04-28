@@ -65,16 +65,16 @@ The backend does four things:
 
 ### 1. Verification
 
-It verifies the PostCode, returning an error if it is invalid
+It verifies the PostCode, returning an error if it is invalid.
 
 ### 2. Finds Latitude and Longitude
 
-If the PostCode is valid, it finds the latitude and longitude of the valid PostCode
+If the PostCode is valid, it finds the latitude and longitude of the valid PostCode.
 
 ### 3. Finds StopPoints
 
-It finds the nearest two StopPoints given the latitude and longitude
+It finds the nearest two StopPoints given the latitude and longitude.
 
 ### 4. Obtains Bus Information
 
-It gets the incoming buses for each StopPoint
+It gets the incoming buses for each StopPoint.
