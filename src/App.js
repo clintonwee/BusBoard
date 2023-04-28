@@ -1,6 +1,6 @@
 import main from "./styles/main.scss";
 import { useState } from "react";
-import BusList from "./components/BusList";
+import StopList from "./components/StopList";
 import Spinner from "./components/Spinner";
 import useBus from "./utils/useBus";
 import { delayFunction } from "./utils/helper";
@@ -55,7 +55,7 @@ function App() {
             Invalid Postcode...
           </p>
         )}
-        {showBusList && <BusList stops={buses} />}
+        {showBusList && <StopList stops={buses} />}
       </div>
     </div>
   );

@@ -7,8 +7,12 @@ const BusList = ({ stops }) => {
       {stops.map((stop, index) => (
         <div key={index} className="stopBox">
           <div className="stopHeader">
-            <p className="roadName">{stop.roadName}</p>
-            <p className="stopName">{stop.stopName}</p>
+            <p className="roadName" role="roadName">
+              {stop.roadName}
+            </p>
+            <p className="stopName" role="stopName">
+              {stop.stopName}
+            </p>
           </div>
           {stop.buses.map((bus, index) => (
             <BusBox key={index} bus={bus} />

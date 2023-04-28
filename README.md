@@ -45,7 +45,7 @@ This message will show up, if no buses are found near the PostCode entered.
 
 This is where the list of buses and their information are populated in the `BusList` component.
 
-### `BusList`
+### `StopLidy`
 
 This is a list of the stops, and their respective incoming buses. Each individual bus is made up of `BusBox` component.
 
