@@ -1,4 +1,4 @@
-import main from "./styles/main.scss";
+import "./styles/main.scss";
 import { useState } from "react";
 import StopList from "./components/StopList";
 import Spinner from "./components/Spinner";
@@ -46,12 +46,12 @@ function App() {
         {isLoading && <Spinner />}
         {showOriginalMessage && <p>Bus Times Displayed Here</p>}
         {showNoBusMessage && (
-          <p className="error" role="noBus">
+          <p className="error" data-testid="noBus">
             Time to walk buddy...
           </p>
         )}
         {showErrorMessage && (
-          <p className="error" role="error">
+          <p className="error" data-testid="error">
             Invalid Postcode...
           </p>
         )}

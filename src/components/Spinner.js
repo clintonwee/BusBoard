@@ -1,7 +1,7 @@
-import spinner from "../styles/spinner.scss";
+import "../styles/spinner.scss";
 
 const Spinner = () => {
-  return <div role="spinner" className="lds-dual-ring"></div>;
+  return <div data-testid="spinner" className="lds-dual-ring"></div>;
 };
 
 export default Spinner;

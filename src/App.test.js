@@ -33,8 +33,8 @@ test("Renders input element", () => {
 });
 
 test("Renders a spinner", () => {
-  const { getByRole } = render(<Spinner />);
-  expect(getByRole("spinner")).toBeInTheDocument();
+  render(<Spinner />);
+  expect(screen.getByTestId("spinner")).toBeInTheDocument();
 });
 
 test("Original Result Message", () => {
@@ -48,7 +48,7 @@ test("Original Result Message after Removing all Input", async () => {
   let originalMessageElement = screen.getByText("Bus Times Displayed Here");
   const inputElement = screen.getByPlaceholderText("CB11AJ");
   fireEvent.change(inputElement, { target: { value: "invalid" } });
-  await screen.findByRole("error", {}, { timeout: 1200 });
+  await screen.findByTestId("error", {}, { timeout: 1200 });
 
   fireEvent.change(inputElement, { target: { value: "" } });
 
@@ -64,35 +64,37 @@ test("Invalid Postcode Message", async () => {
   render(<App />);
   const inputElement = screen.getByPlaceholderText("CB11AJ");
   fireEvent.change(inputElement, { target: { value: "invalid" } });
-  await screen.findByRole("error", {}, { timeout: 1200 });
-  expect(screen.getByRole("error")).toHaveTextContent("Invalid Postcode...");
+  await screen.findByTestId("error", {}, { timeout: 1200 });
+  expect(screen.getByTestId("error")).toHaveTextContent("Invalid Postcode...");
 });
 
 test("No Buses Found Message", async () => {
   render(<App />);
   const inputElement = screen.getByPlaceholderText("CB11AJ");
   fireEvent.change(inputElement, { target: { value: "CB11AJ" } });
-  await screen.findByRole("noBus", {}, { timeout: 1200 });
-  expect(screen.getByRole("noBus")).toHaveTextContent("Time to walk buddy...");
+  await screen.findByTestId("noBus", {}, { timeout: 1200 });
+  expect(screen.getByTestId("noBus")).toHaveTextContent(
+    "Time to walk buddy..."
+  );
 });
 
 test("Post Code Results", async () => {
   render(<App />);
   const inputElement = screen.getByPlaceholderText("CB11AJ");
   fireEvent.change(inputElement, { target: { value: "NW53HG" } });
-  await screen.findByRole("stopContainer", {}, { timeout: 1200 });
+  await screen.findByTestId("stopContainer", {}, { timeout: 1200 });
 
-  expect(screen.getByRole("stopContainer")).toBeInTheDocument();
+  expect(screen.getByTestId("stopContainer")).toBeInTheDocument();
 
-  expect(screen.getByRole("busBox")).toBeInTheDocument();
+  expect(screen.getByTestId("busBox")).toBeInTheDocument();
 
-  expect(screen.getByRole("stopName")).toHaveTextContent("Stop KT");
+  expect(screen.getByTestId("stopName")).toHaveTextContent("Stop KT");
 
-  expect(screen.getByRole("roadName")).toHaveTextContent("Malden Road");
+  expect(screen.getByTestId("roadName")).toHaveTextContent("Malden Road");
 
-  expect(screen.getByRole("busName")).toHaveTextContent("46");
+  expect(screen.getByTestId("busName")).toHaveTextContent("46");
 
-  expect(screen.getByRole("busDestination")).toHaveTextContent("Paddington");
+  expect(screen.getByTestId("busDestination")).toHaveTextContent("Paddington");
 
-  expect(screen.getByRole("busEta")).toHaveTextContent("7 min 20 s");
+  expect(screen.getByTestId("busEta")).toHaveTextContent("7 min 20 s");
 });

@@ -1,15 +1,15 @@
-import bus from "../styles/busBox.scss";
+import "../styles/busBox.scss";
 
 const BusBox = ({ bus }) => {
   return (
-    <div className="busBox" role="busBox">
-      <p className="busItem" role="busName">
+    <div className="busBox" data-testid="busBox">
+      <p className="busItem" data-testid="busName">
         {bus.busName}
       </p>
-      <p className="busItem" role="busDestination">
+      <p className="busItem" data-testid="busDestination">
         {bus.destination}
       </p>
-      <p className="busItem" role="busEta">
+      <p className="busItem" data-testid="busEta">
         {Math.floor(bus.eta / 60)} min {bus.eta % 60} s
       </p>
     </div>

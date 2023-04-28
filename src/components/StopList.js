@@ -1,16 +1,16 @@
-import bus from "../styles/busList.scss";
+import "../styles/busList.scss";
 import BusBox from "./BusBox";
 
 const BusList = ({ stops }) => {
   return (
-    <div className="stopContainer" role="stopContainer">
+    <div className="stopContainer" data-testid="stopContainer">
       {stops.map((stop, index) => (
         <div key={index} className="stopBox">
           <div className="stopHeader">
-            <p className="roadName" role="roadName">
+            <p className="roadName" data-testid="roadName">
               {stop.roadName}
             </p>
-            <p className="stopName" role="stopName">
+            <p className="stopName" data-testid="stopName">
               {stop.stopName}
             </p>
           </div>
