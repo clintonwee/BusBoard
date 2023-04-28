@@ -19,52 +19,62 @@ You may also see any lint errors in the console.
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### `npm run start-api`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Launches the flask backend, which is responsible for fetching and cleaning data obtained from TFL API.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## FrontEnd Layout
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This frontend is made up of the following components:
 
-### `npm run eject`
+### `App.js`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This is the entry point. It contains the containers, the headers, inputs, and result box.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The contents of the result box are controlled by the following conditions:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### 1. Original Message
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+The original message, before any PostCode is entered into the input form.
 
-## Learn More
+#### 3. No Bus Message
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This message will show up, if no buses are found near the PostCode entered.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### 4. Results
 
-### Code Splitting
+This is where the list of buses and their information are populated in the `BusList` component.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### `BusList`
 
-### Analyzing the Bundle Size
+This is a list of the stops, and their respective incoming buses. Each individual bus is made up of `BusBox` component.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### `BusBox`
 
-### Making a Progressive Web App
+This is an individual bus row. It contains the name, destination, and eta of the particular bus.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### `UseBus`
 
-### Advanced Configuration
+This is a react hook, which makes a call to the flask API whenever the user enters the PostCode, and returns the results. It also provides information on the loading state, and any errors arising from the API call.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## BackEnd Layout
 
-### Deployment
+The backend files are located in the `/api` folder. The entry point is `api.py`, with some utility functions located in `utils.py`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+The backend does four things:
 
-### `npm run build` fails to minify
+### 1. Verification
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+It verifies the PostCode, returning an error if it is invalid
+
+### 2. Finds Latitude and Longitude
+
+If the PostCode is valid, it finds the latitude and longitude of the valid PostCode
+
+### 3. Finds StopPoints
+
+It finds the nearest two StopPoints given the latitude and longitude
+
+### 4. Obtains Bus Information
+
+It gets the incoming buses for each StopPoint
