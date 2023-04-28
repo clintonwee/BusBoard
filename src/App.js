@@ -19,7 +19,8 @@ function App() {
   );
 
   const showOriginalMessage =
-    (!hasRun && !error && !isLoading) || postCode.length === 0;
+    (!hasRun && !error && !isLoading && buses.length === 0) ||
+    postCode.length === 0;
 
   const showErrorMessage = error && !isLoading;
 
@@ -36,7 +37,6 @@ function App() {
       </div>
       <form className="inputBox">
         <input
-          id="postCode"
           onChange={processPostCodeChange}
           placeholder="CB11AJ"
           className="input"
@@ -45,8 +45,16 @@ function App() {
       <div className="resultBox">
         {isLoading && <Spinner />}
         {showOriginalMessage && <p>Bus Times Displayed Here</p>}
-        {showNoBusMessage && <p className="error">Time to walk buddy...</p>}
-        {showErrorMessage && <p className="error">Invalid Postcode...</p>}
+        {showNoBusMessage && (
+          <p className="error" role="noBus">
+            Time to walk buddy...
+          </p>
+        )}
+        {showErrorMessage && (
+          <p className="error" role="error">
+            Invalid Postcode...
+          </p>
+        )}
         {showBusList && <BusList stops={buses} />}
       </div>
     </div>

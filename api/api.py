@@ -13,7 +13,6 @@ def get_current_time():
 def get_bus(postcode):
     is_verified = verify(postcode)
     
-    # print("CLinton smelly")
     
     if not is_verified:
         return "Invalid postcode", 500
@@ -23,5 +22,5 @@ def get_bus(postcode):
     stop_points = get_stop_points(longitude, latitude)
     
     results = get_buses(stop_points)
-    
+
     return {'response': results, 'status': 'success'}

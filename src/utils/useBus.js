@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import axios from "axios";
+
 import { useState } from "react";
 function useBus(postcode) {
   const [hasRun, setHasRun] = useState(false);
@@ -9,9 +9,11 @@ function useBus(postcode) {
       return [];
     }
     try {
-      const res = await axios.get(`/bus/${postcode}`);
+      const res = await fetch(`/bus/${postcode}`);
+      const data = await res.json();
       setHasRun(true);
-      return res.data.response;
+      console.log(data);
+      return data.response;
     } catch (e) {
       throw new Error("Invalid Postcode");
     }

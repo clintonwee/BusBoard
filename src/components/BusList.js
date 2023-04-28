@@ -3,7 +3,7 @@ import BusBox from "./BusBox";
 
 const BusList = ({ stops }) => {
   return (
-    <div className="stopContainer">
+    <div className="stopContainer" role="stopContainer">
       {stops.map((stop, index) => (
         <div key={index} className="stopBox">
           <div className="stopHeader">
