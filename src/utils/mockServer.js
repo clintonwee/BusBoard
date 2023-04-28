@@ -1,9 +1,13 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
 
+const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export const server = setupServer(
   // capture "GET /greeting" requests
-  rest.get("/bus/NW53HG", (req, res, ctx) => {
+
+  rest.get("/bus/NW53HG", async (req, res, ctx) => {
+    await sleep(1000);
     return res(
       ctx.json({
         response: [

@@ -12,13 +12,13 @@ afterEach(() => {
 
 afterAll(() => server.close());
 
-test("Renders header correctly", () => {
+test("Header is rendered with correct text", () => {
   render(<App />);
   const linkElement = screen.getByText("Thomas the Bus");
   expect(linkElement).toBeInTheDocument();
 });
 
-test("Renders subheader correctly", () => {
+test("Subheader is rendered with correct text", () => {
   render(<App />);
   const linkElement = screen.getByText(
     "Don't find the bus, let the bus find you!"
@@ -26,24 +26,27 @@ test("Renders subheader correctly", () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-test("Renders input element", () => {
+test("Input element with correct placeholder text is rendered", () => {
   render(<App />);
   const inputElement = screen.getByPlaceholderText("CB11AJ");
   expect(inputElement).toBeInTheDocument();
 });
 
-test("Renders a spinner", () => {
-  render(<Spinner />);
+test("Spinner element is rendered when loading", async () => {
+  render(<App />);
+  const inputElement = screen.getByPlaceholderText("CB11AJ");
+  fireEvent.change(inputElement, { target: { value: "NW53HG" } });
+  await screen.findByTestId("spinner", {}, { timeout: 3000 });
   expect(screen.getByTestId("spinner")).toBeInTheDocument();
 });
 
-test("Original Result Message", () => {
+test("Original Result Message is displayed at the start, without any user input", () => {
   render(<App />);
   const originalMessageElement = screen.getByText("Bus Times Displayed Here");
   expect(originalMessageElement).toBeInTheDocument();
 });
 
-test("Original Result Message after Removing all Input", async () => {
+test("Original Result Message is displayed after input has been cleared", async () => {
   render(<App />);
   let originalMessageElement = screen.getByText("Bus Times Displayed Here");
   const inputElement = screen.getByPlaceholderText("CB11AJ");
@@ -60,7 +63,7 @@ test("Original Result Message after Removing all Input", async () => {
   expect(originalMessageElement).toBeInTheDocument();
 });
 
-test("Invalid Postcode Message", async () => {
+test("Invalid Postcode Message is displayed when user enters a postcode that does not exist", async () => {
   render(<App />);
   const inputElement = screen.getByPlaceholderText("CB11AJ");
   fireEvent.change(inputElement, { target: { value: "invalid" } });
@@ -68,7 +71,7 @@ test("Invalid Postcode Message", async () => {
   expect(screen.getByTestId("error")).toHaveTextContent("Invalid Postcode...");
 });
 
-test("No Buses Found Message", async () => {
+test("'No Buses Found' message is displayed when there are no buses nearby the entered postcode", async () => {
   render(<App />);
   const inputElement = screen.getByPlaceholderText("CB11AJ");
   fireEvent.change(inputElement, { target: { value: "CB11AJ" } });
@@ -78,11 +81,11 @@ test("No Buses Found Message", async () => {
   );
 });
 
-test("Post Code Results", async () => {
+test("List of buses are displayed when a valid postcode has been entered, and there are buses nearby that postcode", async () => {
   render(<App />);
   const inputElement = screen.getByPlaceholderText("CB11AJ");
   fireEvent.change(inputElement, { target: { value: "NW53HG" } });
-  await screen.findByTestId("stopContainer", {}, { timeout: 1200 });
+  await screen.findByTestId("stopContainer", {}, { timeout: 3000 });
 
   expect(screen.getByTestId("stopContainer")).toBeInTheDocument();
 
