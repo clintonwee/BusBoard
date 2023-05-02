@@ -1,7 +1,9 @@
-import "../styles/busList.scss";
+import "../styles/stopList.scss";
 import BusBox from "./BusBox";
+import React from "react";
+import PropTypes from "prop-types";
 
-const BusList = ({ stops }) => {
+const StopList = ({ stops }) => {
   return (
     <div className="stopContainer" data-testid="stopContainer">
       {stops.map((stop, index) => (
@@ -23,4 +25,13 @@ const BusList = ({ stops }) => {
   );
 };
 
-export default BusList;
+StopList.propTypes = {
+  stops: PropTypes.arrayOf(
+    PropTypes.shape({
+      stopName: PropTypes.string,
+      roadName: PropTypes.string,
+    })
+  ),
+};
+
+export default StopList;

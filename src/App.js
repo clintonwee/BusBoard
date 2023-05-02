@@ -4,6 +4,7 @@ import StopList from "./components/StopList";
 import Spinner from "./components/Spinner";
 import useBus from "./utils/useBus";
 import { delayFunction } from "./utils/helper";
+import React from "react";
 
 function App() {
   const [postCode, setPostCode] = useState("");
@@ -33,7 +34,7 @@ function App() {
     <div className="container">
       <div className="headerBox">
         <h1 className="header">Thomas the Bus</h1>
-        <p>Don't find the bus, let the bus find you!</p>
+        <p>Don&#39;t find the bus, let the bus find you!</p>
       </div>
       <form className="inputBox">
         <input

@@ -1,6 +1,6 @@
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import App from "./App";
-import Spinner from "./components/Spinner";
+import React from "react";
 import { server } from "./utils/mockServer";
 
 beforeAll(() => server.listen());
