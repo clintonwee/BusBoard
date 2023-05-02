@@ -4,8 +4,6 @@ import { setupServer } from "msw/node";
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export const server = setupServer(
-  // capture "GET /greeting" requests
-
   rest.get("/bus/NW53HG", async (req, res, ctx) => {
     await sleep(1000);
     return res(
@@ -28,7 +26,6 @@ export const server = setupServer(
     );
   }),
   rest.get("/bus/invalid", (req, res, ctx) => {
-    // respond using a mocked JSON body
     return res(ctx.status(500));
   })
 );
