@@ -5,6 +5,10 @@ from utils import get_coordinates, get_stop_points, get_buses, verify
 
 app = Flask(__name__)
 
+@app.route('/healtcheck')
+def healthcheck():
+    return {'response': "Health Check Completed!", 'status': 'success'}
+
 @app.route('/bus/<postcode>')
 def get_bus(postcode):
     is_verified = verify(postcode)
