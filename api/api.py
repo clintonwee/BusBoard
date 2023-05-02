@@ -13,7 +13,6 @@ def healthcheck():
 def get_bus(postcode):
     is_verified = verify(postcode)
     
-    
     if not is_verified:
         return "Invalid postcode", 500
     

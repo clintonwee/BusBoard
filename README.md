@@ -1,27 +1,42 @@
-# Getting Started with Create React App
+# Zero to Hero
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project consists of a frontend and backend.
 
-## Available Scripts
+## Setup
 
-In the project directory, you can run:
+### Flask Backend
 
-### `npm start`
+#### Step 1: Set up virtual environment
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In the project folder, run the command `python -m venv venv`. This create a venv folder in the project directory.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+#### Step 2: Start virtual environment
 
-### `npm test`
+In the project folder, run the command `venv/Scripts/activate`. This will start the venv, and you will see your terminal has a green "(venv)" appended to the start of each line.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Step 3: Install Python Dependencies
 
-### `npm run start-api`
+While the venv is running, run the command `pip install -r requirements.txt`. This will install all the dependencies needed to run the flask backend.
 
-Launches the flask backend, which is responsible for fetching and cleaning data obtained from TFL API.
+#### Step 4: Run the Flask Backend
+
+Run the command `npm run start-api`. This will start the flask backend. You will need to have installed 'npm' and 'node' for this to work (see below for instructions). Test if the backend is running by making a Get Request (via Postman) to "http://127.0.0.1:5000/healtcheck".
+
+### React Frontend
+
+#### Step 1: Make sure npm and node are installed.
+
+Install npm and node LTS @ https://nodejs.org/en/download.
+
+#### Step 2: Install node modules
+
+In the project folder, run the command `npm install`. This will download all the correct node packages
+
+#### Step 3: Run the React Frontend
+
+Run the command `npm run start`. This will start the server on localhost:3000. Check if the server is running by visiting 'http://localhost:3000/' on any browser.
+
+Any changes to your frontend code will be automatically reflected in the browser.
 
 ## FrontEnd Layout
 
