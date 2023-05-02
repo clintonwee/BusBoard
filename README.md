@@ -1,6 +1,6 @@
 # Zero to Hero
 
-This project consists of a frontend and backend.
+This project consists of a React frontend and a Flask backend.
 
 ## Setup
 
