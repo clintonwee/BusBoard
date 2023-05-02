@@ -20,7 +20,7 @@ While the venv is running, run the command `pip install -r requirements.txt`. Th
 
 #### Step 4: Run the Flask Backend
 
-Run the command `npm run start-api`. This will start the flask backend. You will need to have installed 'npm' and 'node' for this to work (see below for instructions). Test if the backend is running by making a Get Request (via Postman) to "http://127.0.0.1:5000/healtcheck".
+Run the command `npm run start-api`. This will start the flask backend. You will need to have installed 'npm' and 'node' for this to work (see below for instructions). Test if the backend is running by making a Get Request (via Postman) to http://127.0.0.1:5000/healtcheck.
 
 ### React Frontend
 
@@ -34,7 +34,7 @@ In the project folder, run the command `npm install`. This will download all the
 
 #### Step 3: Run the React Frontend
 
-Run the command `npm run start`. This will start the server on localhost:3000. Check if the server is running by visiting 'http://localhost:3000/' on any browser.
+Run the command `npm run start`. This will start the server on localhost:3000. Check if the server is running by visiting http://localhost:3000 on any browser.
 
 Any changes to your frontend code will be automatically reflected in the browser.
 
